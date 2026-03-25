@@ -37,7 +37,7 @@ CREATE TABLE netflix
 
 -- Solutions of 15 business problems
 
--- 1. Count the number of Movies vs TV Shows
+### 1. Count the number of Movies vs TV Shows
 ```sql
 SELECT 
 	type,
@@ -45,7 +45,9 @@ SELECT
 FROM netflix
 GROUP BY 1
 ```sql
--- 2. Find the most common rating for movies and TV shows
+
+
+### 2. Find the most common rating for movies and TV shows
 ```sql
 WITH RatingCounts AS (
     SELECT 
@@ -70,14 +72,16 @@ FROM RankedRatings
 WHERE rank = 1;
 ```sql
 
--- 3. List all movies released in a specific year (e.g., 2020)
+
+### 3. List all movies released in a specific year (e.g., 2020)
 ```sql
 SELECT * 
 FROM netflix
 WHERE release_year = 2020
 ```sql
 
--- 4. Find the top 5 countries with the most content on Netflix
+
+### 4. Find the top 5 countries with the most content on Netflix
 ```sql
 SELECT * 
 FROM
@@ -94,7 +98,8 @@ ORDER BY total_content DESC
 LIMIT 5
 ```sql
 
--- 5. Identify the longest movie
+
+### 5. Identify the longest movie
 ```sql
 SELECT 
 	*
@@ -103,7 +108,8 @@ WHERE type = 'Movie'
 ORDER BY SPLIT_PART(duration, ' ', 1)::INT DESC
 ```sql
 
--- 6. Find content added in the last 5 years
+
+### 6. Find content added in the last 5 years
 ```sql
 SELECT
 *
@@ -111,7 +117,8 @@ FROM netflix
 WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 ```sql
 
--- 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+
+### 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
 ```sql
 SELECT *
 FROM
@@ -128,7 +135,7 @@ WHERE
 ```sql
 
 
--- 8. List all TV shows with more than 5 seasons
+### 8. List all TV shows with more than 5 seasons
 ```sql
 SELECT *
 FROM netflix
@@ -138,7 +145,8 @@ WHERE
 	SPLIT_PART(duration, ' ', 1)::INT > 5
 ```sql
 
--- 9. Count the number of content items in each genre
+
+### 9. Count the number of content items in each genre
 ```sql
 SELECT 
 	UNNEST(STRING_TO_ARRAY(listed_in, ',')) as genre,
@@ -147,7 +155,8 @@ FROM netflix
 GROUP BY 1
 ```sql
 
--- 10. Find each year and the average numbers of content release by India on netflix. 
+
+### 10. Find each year and the average numbers of content release by India on netflix. 
 -- return top 5 year with highest avg content release !
 
 ```sql
@@ -168,20 +177,22 @@ ORDER BY avg_release DESC
 LIMIT 5
 ```sql
 
--- 11. List all movies that are documentaries
+
+### 11. List all movies that are documentaries
 ```sql
 SELECT * FROM netflix
 WHERE listed_in LIKE '%Documentaries'
 ```sql
 
 
--- 12. Find all content without a director
+### 12. Find all content without a director
 ```sql
 SELECT * FROM netflix
 WHERE director IS NULL
 ```sql
 
--- 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+
+### 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
 ```sql
 SELECT * FROM netflix
 WHERE 
@@ -190,7 +201,9 @@ WHERE
 	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10
 ```sql
 
--- 14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+
+
+### 14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 
 
 ```sql
@@ -204,12 +217,12 @@ ORDER BY 2 DESC
 LIMIT 10
 ```sql
 
-/*
-Question 15:
+
+### Question 15:
 Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'Bad' and all other 
 content as 'Good'. Count how many items fall into each category.
-*/
+
 
 ```sql
 SELECT 
